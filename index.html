@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#e5322c" />
+    <meta name="description" content="ApexGP Racing — cinematic single-player and friend multiplayer racing." />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <title>ApexGP Racing</title>
+  </head>
+  <body>
+    <main id="app">
+      <div id="game-root"></div>
+      <div id="vignette"></div>
+
+      <section id="menu-screen" class="screen active" aria-label="ApexGP home screen">
+        <div class="brand-lockup">
+          <span class="brand-kicker">APEX GRAND PRIX</span>
+          <h1>APEX<span>GP</span></h1>
+          <p>Earn every apex.</p>
+        </div>
+        <div class="menu-grid">
+          <button class="menu-card primary" id="practice-btn">
+            <span class="card-index">01</span>
+            <span class="card-title">Practice race</span>
+            <span class="card-subtitle">Solo championship • 100 levels</span>
+          </button>
+          <button class="menu-card" id="multiplayer-btn">
+            <span class="card-index">02</span>
+            <span class="card-title">Race a friend</span>
+            <span class="card-subtitle">Create or join a private room</span>
+          </button>
+          <button class="menu-card" id="garage-btn">
+            <span class="card-index">03</span>
+            <span class="card-title">Garage</span>
+            <span class="card-subtitle">Tune your car • view progress</span>
+          </button>
+        </div>
+        <div class="home-footer">
+          <span><i class="status-dot"></i> SYSTEMS ONLINE</span>
+          <span>v0.1 / WEB MVP</span>
+        </div>
+      </section>
+
+      <section id="level-screen" class="screen" aria-label="Select a championship level">
+        <div class="screen-header">
+          <button class="back-btn" data-back="menu-screen">← <span>Back</span></button>
+          <div>
+            <span class="eyebrow">CHAMPIONSHIP</span>
+            <h2>Select a level</h2>
+          </div>
+          <div class="header-stat"><strong id="level-progress">1 / 100</strong><span>unlocked</span></div>
+        </div>
+        <div id="level-grid" class="level-grid"></div>
+      </section>
+
+      <section id="multiplayer-screen" class="screen" aria-label="Multiplayer room setup">
+        <div class="screen-header compact">
+          <button class="back-btn" data-back="menu-screen">← <span>Back</span></button>
+          <div>
+            <span class="eyebrow">PRIVATE GRID</span>
+            <h2>Race a friend</h2>
+          </div>
+          <span class="connection-label" id="connection-label">NOT CONNECTED</span>
+        </div>
+        <div class="multiplayer-layout">
+          <div class="mp-panel">
+            <span class="eyebrow">HOST A ROOM</span>
+            <h3>Start your own grid</h3>
+            <p>Share the six-letter code with your friend. The host chooses the level and starts the race.</p>
+            <button class="action-btn red" id="create-room-btn">Create room</button>
+            <div class="room-code-wrap hidden" id="host-code-wrap">
+              <span>YOUR ROOM CODE</span>
+              <strong id="host-code">------</strong>
+              <button class="copy-btn" id="copy-code-btn">Copy code</button>
+            </div>
+            <label class="code-input-label hidden" id="host-level-label" for="host-level-select">STARTING LEVEL</label>
+            <select id="host-level-select" class="code-input hidden" aria-label="Starting level"></select>
+            <button class="action-btn gold hidden" id="host-start-btn">Start race</button>
+          </div>
+          <div class="mp-divider"><span>OR</span></div>
+          <div class="mp-panel">
+            <span class="eyebrow">JOIN A ROOM</span>
+            <h3>Enter the grid</h3>
+            <p>Use the code your friend sent you. Both players need to be on the same deployed game link.</p>
+            <label class="code-input-label" for="join-code">ROOM CODE</label>
+            <input id="join-code" class="code-input" inputmode="text" maxlength="6" placeholder="ABC123" autocomplete="off" />
+            <button class="action-btn" id="join-room-btn">Join room</button>
+            <p class="mp-status" id="mp-status">Practice mode works without a connection.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="garage-screen" class="screen" aria-label="Garage">
+        <div class="screen-header compact">
+          <button class="back-btn" data-back="menu-screen">← <span>Back</span></button>
+          <div>
+            <span class="eyebrow">TEAM APEX</span>
+            <h2>Garage</h2>
+          </div>
+          <span class="garage-balance" id="garage-balance">0 GP</span>
+        </div>
+        <div class="garage-layout">
+          <div class="garage-car-card">
+            <div class="garage-car-glow"></div>
+            <div class="garage-car-name">APX-01 <span>SPEC // 01</span></div>
+            <div class="garage-car-art"><div class="mini-car"></div></div>
+            <p>Balanced downforce setup with predictable turn-in. Built to learn every circuit.</p>
+          </div>
+          <div class="tuning-panel">
+            <span class="eyebrow">PERFORMANCE DATA</span>
+            <div class="stat-row"><span>TOP SPEED</span><div class="meter"><i style="width:72%"></i></div><b>312</b></div>
+            <div class="stat-row"><span>ACCELERATION</span><div class="meter"><i style="width:80%"></i></div><b>8.4</b></div>
+            <div class="stat-row"><span>DOWNFORCE</span><div class="meter"><i style="width:64%"></i></div><b>64</b></div>
+            <div class="stat-row"><span>GRIP</span><div class="meter"><i style="width:77%"></i></div><b>77</b></div>
+            <div class="garage-note"><span>DRIVER RATING</span><strong id="driver-rating">ROOKIE</strong><small>Win races and improve your rating.</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="countdown-screen" class="screen overlay-screen" aria-label="Race starting">
+        <div class="countdown-copy"><span id="countdown-round">ROUND 01 • SUNSET RUN</span><strong id="countdown-value">3</strong><small>GET READY</small></div>
+      </section>
+
+      <section id="finish-screen" class="screen overlay-screen" aria-label="Race results">
+        <div class="finish-panel">
+          <span class="eyebrow">RACE COMPLETE</span>
+          <div class="finish-position" id="finish-position">P1</div>
+          <h2 id="finish-title">APEX SECURED</h2>
+          <p id="finish-summary">You crossed the line first.</p>
+          <div class="result-stats">
+            <div><span>TIME</span><strong id="finish-time">00:00.00</strong></div>
+            <div><span>LEVEL</span><strong id="finish-level">01</strong></div>
+            <div><span>REWARD</span><strong id="finish-reward">+100 GP</strong></div>
+          </div>
+          <div class="finish-actions"><button class="action-btn red" id="next-level-btn">Next level</button><button class="action-btn" id="finish-menu-btn">Return to menu</button></div>
+        </div>
+      </section>
+
+      <section id="race-hud" class="hud hidden" aria-label="Race heads-up display">
+        <div class="hud-top">
+          <div class="hud-event"><span id="hud-circuit">SUNSET RUN</span><strong id="hud-level">LVL 01</strong></div>
+          <div class="hud-lap"><strong id="hud-lap">LAP 1 / 2</strong><span>RACE</span></div>
+          <div class="hud-position"><strong id="hud-position">P1</strong><span>POSITION</span></div>
+        </div>
+        <div class="hud-bottom">
+          <div class="speed-block"><strong id="hud-speed">000</strong><span>KM/H</span></div>
+          <div class="tachometer"><div class="tach-label"><span>RPM</span><span id="hud-gear">N</span></div><div class="tach-track"><i id="hud-rpm"></i></div></div>
+          <div class="race-timer"><span>TIME</span><strong id="hud-time">00:00.00</strong></div>
+        </div>
+        <div class="mobile-controls" aria-label="Touch driving controls">
+          <button class="touch-btn steer left" id="touch-left">‹</button>
+          <button class="touch-btn brake" id="touch-brake">BRAKE</button>
+          <button class="touch-btn steer right" id="touch-right">›</button>
+          <button class="touch-btn throttle" id="touch-throttle">THROTTLE</button>
+        </div>
+        <div class="race-hint" id="race-hint">W / ↑ accelerate &nbsp; A D / ← → steer &nbsp; S / ↓ brake</div>
+      </section>
+
+      <div class="toast" id="toast" role="status"></div>
+      <div class="loading-screen" id="loading-screen"><div class="loading-mark">APEX<span>GP</span></div><div class="loading-bar"><i></i></div><small>BUILDING THE GRID</small></div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
