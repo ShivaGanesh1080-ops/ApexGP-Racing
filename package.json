@@ -1,0 +1,21 @@
+{
+  "name": "apexgp-racing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
+    "peerjs": "^1.5.5",
+    "three": "^0.168.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.8"
+  }
+}
