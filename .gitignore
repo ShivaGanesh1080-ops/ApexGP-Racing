@@ -1,0 +1,8 @@
+node_modules
+dist
+*.local
+apexgp-race-preview.png
+android/.gradle
+android/build
+android/app/build
+android/capacitor-cordova-android-plugins/build
