@@ -1,0 +1,18 @@
+{
+  "name": "ApexGP Racing",
+  "short_name": "ApexGP",
+  "description": "A cinematic single-player and friend multiplayer racing game.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070b",
+  "theme_color": "#e5322c",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
