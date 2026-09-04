@@ -25,7 +25,7 @@ The first release uses browser-to-browser data channels with PeerJS's public sig
 
 ## Android app
 
-The repository includes a Capacitor Android wrapper under `android/` with package ID `com.shivaganesh.apexgp`. The GitHub Actions workflow at `.github/workflows/android-apk.yml` builds a debug APK on every push to `main` and uploads it as the `ApexGP-debug-apk` workflow artifact. A release APK for Play Store distribution still needs a signing keystore and release configuration; keep signing secrets in GitHub/Vercel settings, never in source files.
+The repository includes Capacitor configuration for package ID `com.shivaganesh.apexgp`. The GitHub Actions workflow at `.github/workflows/android-apk.yml` generates the Android wrapper on the runner, builds a debug APK on every push to `main`, and uploads it as the `ApexGP-debug-apk` workflow artifact. A release APK for Play Store distribution still needs a signing keystore and release configuration; keep signing secrets in GitHub/Vercel settings, never in source files.
 
 For a commercial release, move signaling to a controlled provider, add authoritative race validation, accounts, matchmaking, anti-cheat checks, sound/physics assets, and a full game-engine client if console-grade fidelity is required.
 
