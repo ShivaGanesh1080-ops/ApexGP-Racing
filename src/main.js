@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Peer from 'peerjs';
 import './styles.css';
 
 const $ = (id) => document.getElementById(id);
